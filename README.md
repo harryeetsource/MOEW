@@ -106,7 +106,7 @@ These faults are not accidental; they are the functional equivalent of “synthe
 
 ## 2.2 Windows Structured Exception Handling (SEH)
 
-On 32-bit Windows, each thread maintains an SEH chain at `TEB->ExceptionList`, exposed to user-mode as `fs:[0]`. The chain is a singly-linked list of **exception registration records** that live on the thread’s stack.
+On 32-bit Windows, each thread maintains a SEH chain at `TEB->ExceptionList`, exposed to user-mode as `fs:[0]`. The chain is a singly-linked list of **exception registration records** that live on the thread’s stack.
 
 Each record has:
 
