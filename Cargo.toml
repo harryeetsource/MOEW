@@ -1,0 +1,7 @@
+[package]
+name = "seh_waterfall"
+version = "0.1.0"
+edition = "2024"
+[target.i686-pc-windows-msvc]
+[dependencies]
+obfustr = "0.1.2"
