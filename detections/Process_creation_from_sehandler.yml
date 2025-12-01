@@ -1,0 +1,27 @@
+title: Process Created From SEH
+id: f2af6d61-b799-48d9-9782-65d1b1dd3137
+status: experimental
+description: Process creation where call stack contains trace from a Structured Exception Handler. This can be indicative of defense evasion via SEH abuse as handlers very rarely create new processes.
+references:
+    - https://github.com/elastic/protections-artifacts/blob/main/behavior/rules/windows/defense_evasion_virtualprotect_via_vectored_exception_handling.toml
+    - https://github.com/harryeetsource/MOEW/tree/main
+author: Carson Hrusovsky
+date: 2025/11/27
+tags:
+    - SEH
+    - MOEW
+logsource:
+    product: windows
+    service: Elastic Defend
+    category: process_creation
+detection:
+    selection:
+        process_creation_event:
+            event.action: start
+        suspicious_callstack_trace:
+            process.thread.Ext.call_stack.symbol_info|contains:
+                - ntdll!KiUserExceptionDispatcher
+    condition: process_creation_event and suspicious_callstack_trace
+falsepositives:
+    - Legitimate process creations via SEH - likely for error handling.
+level: medium
